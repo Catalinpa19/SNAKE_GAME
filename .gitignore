@@ -1,0 +1,35 @@
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# IntelliSense
+ipch/
+*.ipch
+
+# Build outputs
+Debug/
+Release/
+x64/
+x86/
+bin/
+obj/
+
+# Generated files
+*.pdb
+*.ilk
+*.obj
+*.pch
+*.lib
+*.dll
+*.exe
+
+
+packages/
+
+# Temporary files
+*.log
+*.tmp

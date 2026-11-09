@@ -1,8 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-  </Configurations>
-  <Project Path="SnakeLogic/SnakeLogic.vcxproj" />
-  <Project Path="SnakeTests/SnakeTests.vcxproj" />
-  <Project Path="SnakeUI/SnakeUI.vcxproj" />
-</Solution>

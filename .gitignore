@@ -33,7 +33,3 @@ packages/
 # Temporary files
 *.log
 *.tmp
-
-# Solution file
-*.sln
-*.slnx

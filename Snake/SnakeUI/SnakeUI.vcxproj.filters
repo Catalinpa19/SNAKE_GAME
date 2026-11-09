@@ -1,48 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
-    <Filter Include="Translation Files">
-      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
-      <Extensions>ts</Extensions>
+    <Filter Include="app"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000001}</UniqueIdentifier></Filter>
+    <Filter Include="screens"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000002}</UniqueIdentifier></Filter>
+    <Filter Include="widgets"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000003}</UniqueIdentifier></Filter>
+    <Filter Include="resources"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000004}</UniqueIdentifier>
+      <Extensions>qrc;svg;png;wav</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="SnakeUI.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtUic Include="SnakeUI.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtMoc Include="SnakeUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="SnakeUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ResourceCompile Include="$pro_name$.rc">
-    </ResourceCompile>
-    <None Include="$pro_name$.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="$pro_name$.def">
-      <Filter>Resource Files</Filter>
-    </None>
-
+    <ClCompile Include="main.cpp" />
+    <QtRcc Include="SnakeUI.qrc"><Filter>resources</Filter></QtRcc>
+    <ResourceCompile Include="SnakeUI.rc"><Filter>resources</Filter></ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectConfiguration Include="Debug|x64"><Filter>ProjectConfigurations</Filter></ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64"><Filter>ProjectConfigurations</Filter></ProjectConfiguration>
+    <ClCompile Include="app\Catalog.cpp"><Filter>app</Filter></ClCompile>
+    <ClInclude Include="app\Catalog.h"><Filter>app</Filter></ClInclude>
+    <ClCompile Include="app\MainWindow.cpp"><Filter>app</Filter></ClCompile>
+    <QtMoc Include="app\MainWindow.h"><Filter>app</Filter></QtMoc>
+    <ClCompile Include="app\ProfileStore.cpp"><Filter>app</Filter></ClCompile>
+    <ClInclude Include="app\ProfileStore.h"><Filter>app</Filter></ClInclude>
+    <ClCompile Include="app\ScreenNavigator.cpp"><Filter>app</Filter></ClCompile>
+    <QtMoc Include="app\ScreenNavigator.h"><Filter>app</Filter></QtMoc>
+    <ClInclude Include="app\Theme.h"><Filter>app</Filter></ClInclude>
+    <ClCompile Include="screens\AchievementsScreen.cpp"><Filter>screens</Filter></ClCompile>
+    <ClInclude Include="screens\AchievementsScreen.h"><Filter>screens</Filter></ClInclude>
+    <ClCompile Include="screens\ListScreen.cpp"><Filter>screens</Filter></ClCompile>
+    <ClInclude Include="screens\ListScreen.h"><Filter>screens</Filter></ClInclude>
+    <ClCompile Include="screens\MainMenuScreen.cpp"><Filter>screens</Filter></ClCompile>
+    <QtMoc Include="screens\MainMenuScreen.h"><Filter>screens</Filter></QtMoc>
+    <ClCompile Include="screens\PanelScreen.cpp"><Filter>screens</Filter></ClCompile>
+    <QtMoc Include="screens\PanelScreen.h"><Filter>screens</Filter></QtMoc>
+    <ClCompile Include="screens\PlaceholderScreen.cpp"><Filter>screens</Filter></ClCompile>
+    <ClInclude Include="screens\PlaceholderScreen.h"><Filter>screens</Filter></ClInclude>
+    <ClCompile Include="screens\SettingsScreen.cpp"><Filter>screens</Filter></ClCompile>
+    <QtMoc Include="screens\SettingsScreen.h"><Filter>screens</Filter></QtMoc>
+    <ClCompile Include="screens\ShopScreen.cpp"><Filter>screens</Filter></ClCompile>
+    <QtMoc Include="screens\ShopScreen.h"><Filter>screens</Filter></QtMoc>
+    <ClCompile Include="widgets\ArtImage.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\ArtImage.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\ArtWidget.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\ArtWidget.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\BackgroundWidget.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\BackgroundWidget.h"><Filter>widgets</Filter></ClInclude>
+    <ClInclude Include="widgets\Divider.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\HudButton.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\HudButton.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\IconButton.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\IconButton.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\ListRow.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\ListRow.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\MenuButton.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\MenuButton.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\MenuHeaderWidget.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\MenuHeaderWidget.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\OptionButton.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\OptionButton.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\OptionRow.cpp"><Filter>widgets</Filter></ClCompile>
+    <QtMoc Include="widgets\OptionRow.h"><Filter>widgets</Filter></QtMoc>
+    <ClCompile Include="widgets\SvgButton.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\SvgButton.h"><Filter>widgets</Filter></ClInclude>
+    <ClCompile Include="widgets\TitleWidget.cpp"><Filter>widgets</Filter></ClCompile>
+    <ClInclude Include="widgets\TitleWidget.h"><Filter>widgets</Filter></ClInclude>
+    <None Include="resources\app.ico"><Filter>resources</Filter></None>
+    <None Include="resources\art\achievements.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\background.png"><Filter>resources</Filter></None>
+    <None Include="resources\art\count_1.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\count_10.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\count_3.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\count_5.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\drumstick.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\size_2x2.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\size_3x3.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\size_4x4.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\snake_menu.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\speed_fast.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\speed_normal.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\speed_slow.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\sphere.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\trophy.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\back.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\chevron_left.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\chevron_right.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\dice.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\lock.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\play.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\settings.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\shop.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\sound_off.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\sound_on.svg"><Filter>resources</Filter></None>
+    <None Include="resources\icons\star.svg"><Filter>resources</Filter></None>
   </ItemGroup>
 </Project>

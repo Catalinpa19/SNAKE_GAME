@@ -1,4 +1,31 @@
-<RCC>
-    <qresource prefix="SnakeUI">
+﻿<RCC>
+    <qresource prefix="/">
+        <file alias="icons/play.svg">resources/icons/play.svg</file>
+        <file alias="icons/settings.svg">resources/icons/settings.svg</file>
+        <file alias="icons/star.svg">resources/icons/star.svg</file>
+        <file alias="icons/back.svg">resources/icons/back.svg</file>
+        <file alias="icons/dice.svg">resources/icons/dice.svg</file>
+        <file alias="icons/sound_on.svg">resources/icons/sound_on.svg</file>
+        <file alias="icons/sound_off.svg">resources/icons/sound_off.svg</file>
+        <file alias="icons/shop.svg">resources/icons/shop.svg</file>
+        <file alias="icons/lock.svg">resources/icons/lock.svg</file>
+        <file alias="icons/chevron_left.svg">resources/icons/chevron_left.svg</file>
+        <file alias="icons/chevron_right.svg">resources/icons/chevron_right.svg</file>
+        <file alias="art/background.png">resources/art/background.png</file>
+        <file alias="art/snake_menu.svg">resources/art/snake_menu.svg</file>
+        <file alias="art/trophy.svg">resources/art/trophy.svg</file>
+        <file alias="art/drumstick.svg">resources/art/drumstick.svg</file>
+        <file alias="art/sphere.svg">resources/art/sphere.svg</file>
+        <file alias="art/count_1.svg">resources/art/count_1.svg</file>
+        <file alias="art/count_3.svg">resources/art/count_3.svg</file>
+        <file alias="art/count_5.svg">resources/art/count_5.svg</file>
+        <file alias="art/count_10.svg">resources/art/count_10.svg</file>
+        <file alias="art/size_2x2.svg">resources/art/size_2x2.svg</file>
+        <file alias="art/size_3x3.svg">resources/art/size_3x3.svg</file>
+        <file alias="art/size_4x4.svg">resources/art/size_4x4.svg</file>
+        <file alias="art/achievements.svg">resources/art/achievements.svg</file>
+        <file alias="art/speed_slow.svg">resources/art/speed_slow.svg</file>
+        <file alias="art/speed_normal.svg">resources/art/speed_normal.svg</file>
+        <file alias="art/speed_fast.svg">resources/art/speed_fast.svg</file>
     </qresource>
 </RCC>

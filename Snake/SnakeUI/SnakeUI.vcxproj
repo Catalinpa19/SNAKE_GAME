@@ -15,19 +15,18 @@
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')"
-      >$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -37,20 +36,17 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>QT 6.9.3 MSVC2022_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>C:\Qt\6.12.0\msvc2022_64</QtInstall>
+    <QtModules>core;gui;widgets;svg</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>QT 6.9.3 MSVC2022_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>C:\Qt\6.12.0\msvc2022_64</QtInstall>
+    <QtModules>core;gui;widgets;svg</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
-  <Target Name="QtMsBuildNotFound"
-    BeforeTargets="CustomBuild;ClCompile"
-    Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High"
-      Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
   </Target>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
@@ -72,7 +68,11 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -84,7 +84,11 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
@@ -96,12 +100,93 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="SnakeUI.qrc"/>
-    <QtUic Include="SnakeUI.ui"/>
-    <QtMoc Include="SnakeUI.h"/>
-    <ClCompile Include="SnakeUI.cpp"/>
-    <ClCompile Include="main.cpp"/>
-
+    <QtRcc Include="SnakeUI.qrc" />
+    <ClCompile Include="main.cpp" />
+    <ResourceCompile Include="SnakeUI.rc" />
+  </ItemGroup>
+  <ItemGroup Label="app">
+    <ClCompile Include="app\Catalog.cpp" />
+    <ClInclude Include="app\Catalog.h" />
+    <ClCompile Include="app\MainWindow.cpp" />
+    <QtMoc Include="app\MainWindow.h" />
+    <ClCompile Include="app\ProfileStore.cpp" />
+    <ClInclude Include="app\ProfileStore.h" />
+    <ClCompile Include="app\ScreenNavigator.cpp" />
+    <QtMoc Include="app\ScreenNavigator.h" />
+    <ClInclude Include="app\Theme.h" />
+  </ItemGroup>
+  <ItemGroup Label="screens">
+    <ClCompile Include="screens\AchievementsScreen.cpp" />
+    <ClInclude Include="screens\AchievementsScreen.h" />
+    <ClCompile Include="screens\ListScreen.cpp" />
+    <ClInclude Include="screens\ListScreen.h" />
+    <ClCompile Include="screens\MainMenuScreen.cpp" />
+    <QtMoc Include="screens\MainMenuScreen.h" />
+    <ClCompile Include="screens\PanelScreen.cpp" />
+    <QtMoc Include="screens\PanelScreen.h" />
+    <ClCompile Include="screens\PlaceholderScreen.cpp" />
+    <ClInclude Include="screens\PlaceholderScreen.h" />
+    <ClCompile Include="screens\SettingsScreen.cpp" />
+    <QtMoc Include="screens\SettingsScreen.h" />
+    <ClCompile Include="screens\ShopScreen.cpp" />
+    <QtMoc Include="screens\ShopScreen.h" />
+  </ItemGroup>
+  <ItemGroup Label="widgets">
+    <ClCompile Include="widgets\ArtImage.cpp" />
+    <ClInclude Include="widgets\ArtImage.h" />
+    <ClCompile Include="widgets\ArtWidget.cpp" />
+    <ClInclude Include="widgets\ArtWidget.h" />
+    <ClCompile Include="widgets\BackgroundWidget.cpp" />
+    <ClInclude Include="widgets\BackgroundWidget.h" />
+    <ClInclude Include="widgets\Divider.h" />
+    <ClCompile Include="widgets\HudButton.cpp" />
+    <ClInclude Include="widgets\HudButton.h" />
+    <ClCompile Include="widgets\IconButton.cpp" />
+    <ClInclude Include="widgets\IconButton.h" />
+    <ClCompile Include="widgets\ListRow.cpp" />
+    <ClInclude Include="widgets\ListRow.h" />
+    <ClCompile Include="widgets\MenuButton.cpp" />
+    <ClInclude Include="widgets\MenuButton.h" />
+    <ClCompile Include="widgets\MenuHeaderWidget.cpp" />
+    <ClInclude Include="widgets\MenuHeaderWidget.h" />
+    <ClCompile Include="widgets\OptionButton.cpp" />
+    <ClInclude Include="widgets\OptionButton.h" />
+    <ClCompile Include="widgets\OptionRow.cpp" />
+    <QtMoc Include="widgets\OptionRow.h" />
+    <ClCompile Include="widgets\SvgButton.cpp" />
+    <ClInclude Include="widgets\SvgButton.h" />
+    <ClCompile Include="widgets\TitleWidget.cpp" />
+    <ClInclude Include="widgets\TitleWidget.h" />
+  </ItemGroup>
+  <ItemGroup Label="resources">
+    <None Include="resources\app.ico" />
+    <None Include="resources\art\achievements.svg" />
+    <None Include="resources\art\background.png" />
+    <None Include="resources\art\count_1.svg" />
+    <None Include="resources\art\count_10.svg" />
+    <None Include="resources\art\count_3.svg" />
+    <None Include="resources\art\count_5.svg" />
+    <None Include="resources\art\drumstick.svg" />
+    <None Include="resources\art\size_2x2.svg" />
+    <None Include="resources\art\size_3x3.svg" />
+    <None Include="resources\art\size_4x4.svg" />
+    <None Include="resources\art\snake_menu.svg" />
+    <None Include="resources\art\speed_fast.svg" />
+    <None Include="resources\art\speed_normal.svg" />
+    <None Include="resources\art\speed_slow.svg" />
+    <None Include="resources\art\sphere.svg" />
+    <None Include="resources\art\trophy.svg" />
+    <None Include="resources\icons\back.svg" />
+    <None Include="resources\icons\chevron_left.svg" />
+    <None Include="resources\icons\chevron_right.svg" />
+    <None Include="resources\icons\dice.svg" />
+    <None Include="resources\icons\lock.svg" />
+    <None Include="resources\icons\play.svg" />
+    <None Include="resources\icons\settings.svg" />
+    <None Include="resources\icons\shop.svg" />
+    <None Include="resources\icons\sound_off.svg" />
+    <None Include="resources\icons\sound_on.svg" />
+    <None Include="resources\icons\star.svg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

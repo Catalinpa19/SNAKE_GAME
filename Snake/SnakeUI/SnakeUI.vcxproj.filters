@@ -80,6 +80,8 @@
     <None Include="resources\art\speed_normal.svg"><Filter>resources</Filter></None>
     <None Include="resources\art\speed_slow.svg"><Filter>resources</Filter></None>
     <None Include="resources\art\sphere.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\subtitle.svg"><Filter>resources</Filter></None>
+    <None Include="resources\art\title.svg"><Filter>resources</Filter></None>
     <None Include="resources\art\trophy.svg"><Filter>resources</Filter></None>
     <None Include="resources\icons\back.svg"><Filter>resources</Filter></None>
     <None Include="resources\icons\chevron_left.svg"><Filter>resources</Filter></None>

@@ -175,6 +175,8 @@
     <None Include="resources\art\speed_normal.svg" />
     <None Include="resources\art\speed_slow.svg" />
     <None Include="resources\art\sphere.svg" />
+    <None Include="resources\art\subtitle.svg" />
+    <None Include="resources\art\title.svg" />
     <None Include="resources\art\trophy.svg" />
     <None Include="resources\icons\back.svg" />
     <None Include="resources\icons\chevron_left.svg" />

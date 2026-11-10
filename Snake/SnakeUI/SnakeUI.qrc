@@ -15,6 +15,8 @@
         <file alias="art/snake_menu.svg">resources/art/snake_menu.svg</file>
         <file alias="art/trophy.svg">resources/art/trophy.svg</file>
         <file alias="art/drumstick.svg">resources/art/drumstick.svg</file>
+        <file alias="art/title.svg">resources/art/title.svg</file>
+        <file alias="art/subtitle.svg">resources/art/subtitle.svg</file>
         <file alias="art/sphere.svg">resources/art/sphere.svg</file>
         <file alias="art/count_1.svg">resources/art/count_1.svg</file>
         <file alias="art/count_3.svg">resources/art/count_3.svg</file>

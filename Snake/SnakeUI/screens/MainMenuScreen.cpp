@@ -32,18 +32,3 @@ MainMenuScreen::MainMenuScreen(QWidget* parent)
     connect(settings, &QAbstractButton::clicked, this, &MainMenuScreen::settingsRequested);
     connect(achievements, &QAbstractButton::clicked, this, &MainMenuScreen::achievementsRequested);
 }
-
-void MainMenuScreen::setScores(int drumsticks, int bestScore)
-{
-    m_header->setScores(drumsticks, bestScore);
-}
-
-void MainMenuScreen::setSnakeColor(const QColor& color)
-{
-    m_header->setSnakeColor(color);
-}
-
-void MainMenuScreen::setGroundColors(const QColor& light, const QColor& dark)
-{
-    m_header->setGroundColors(light, dark);
-}

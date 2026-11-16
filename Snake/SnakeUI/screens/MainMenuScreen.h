@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QColor>
 #include <QWidget>
 
 class MenuHeaderWidget;
@@ -12,9 +11,7 @@ class MainMenuScreen : public QWidget
 public:
     explicit MainMenuScreen(QWidget* parent = nullptr);
 
-    void setScores(int drumsticks, int bestScore);
-    void setSnakeColor(const QColor& color);
-    void setGroundColors(const QColor& light, const QColor& dark);
+    MenuHeaderWidget* header() const { return m_header; }
 
 signals:
     void playRequested();

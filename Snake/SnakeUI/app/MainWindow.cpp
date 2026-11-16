@@ -3,14 +3,17 @@
 #include "app/ProfileStore.h"
 #include "app/ScreenNavigator.h"
 #include "screens/AchievementsScreen.h"
+#include "screens/GameScreen.h"
 #include "screens/MainMenuScreen.h"
-#include "screens/PlaceholderScreen.h"
+#include "screens/PauseOverlay.h"
 #include "screens/SettingsScreen.h"
 #include "screens/ShopScreen.h"
 #include "widgets/BackgroundWidget.h"
 #include "widgets/HudButton.h"
+#include "widgets/MenuHeaderWidget.h"
 
 #include <QEvent>
+#include <QKeyEvent>
 #include <QStackedWidget>
 #include <QVBoxLayout>
 
@@ -31,12 +34,13 @@ MainWindow::MainWindow(ProfileStore& profile, QWidget* parent)
     connectMenu();
     connectSettings();
     connectShop();
+    connectGame();
 
     for (const ColorKind kind : kColorKinds)
         applyColor(kind, m_profile.data().equipped(kind));
     showScores();
 
-    for (PanelScreen* screen : std::initializer_list<PanelScreen*>{m_settings, m_achievements, m_shop, m_game})
+    for (PanelScreen* screen : std::initializer_list<PanelScreen*>{m_settings, m_achievements, m_shop})
         connect(screen, &PanelScreen::backRequested, this, [this] { m_navigator->goTo(Screen::MainMenu); });
 
     m_navigator->goTo(Screen::MainMenu);
@@ -56,19 +60,23 @@ void MainWindow::createScreens()
     m_settings = new SettingsScreen(m_profile.data());
     m_achievements = new AchievementsScreen(m_profile.data());
     m_shop = new ShopScreen(m_profile.data());
-    m_game = new PlaceholderScreen(tr("Game"));
+    m_game = new GameScreen(m_sound);
+    m_pause = new PauseOverlay(m_sound, m_background);
 
     m_navigator->addScreen(Screen::MainMenu, m_menu);
     m_navigator->addScreen(Screen::Settings, m_settings);
     m_navigator->addScreen(Screen::Achievements, m_achievements);
     m_navigator->addScreen(Screen::Shop, m_shop);
-    m_navigator->addScreen(Screen::Game, m_game);
+    m_navigator->addScreen(Screen::Game, m_game, true);
 
     connect(m_navigator, &ScreenNavigator::screenChanged, this, [this](Screen screen) {
+        m_shopButton->setVisible(screen != Screen::Game);
         if (screen == Screen::Shop)
             m_shop->refresh(m_profile.data());
         else if (screen == Screen::Achievements)
             m_achievements->refresh(m_profile.data());
+        else if (screen == Screen::Game)
+            m_game->reset();
     });
 }
 
@@ -80,7 +88,7 @@ void MainWindow::createHudButtons()
     setAudioEnabled(m_profile.data().settings.audioEnabled);
 
     m_background->installEventFilter(this);
-    positionHudButtons();
+    positionOverlays();
 
     connect(m_shopButton, &QAbstractButton::clicked, this, [this] { m_navigator->goTo(Screen::Shop); });
     connect(m_soundButton, &QAbstractButton::clicked, this, [this] {
@@ -91,8 +99,6 @@ void MainWindow::createHudButtons()
 
 void MainWindow::connectMenu()
 {
-    // LOGIC: Play starts a round: create it with createGame(settings, services) from Factory.h, show the game
-    // screen and drive it with QTimer -> IGame::tick() and key presses -> IGame::changeDirection().
     connect(m_menu, &MainMenuScreen::playRequested, this, [this] { m_navigator->goTo(Screen::Game); });
     connect(m_menu, &MainMenuScreen::settingsRequested, this, [this] { m_navigator->goTo(Screen::Settings); });
     connect(m_menu, &MainMenuScreen::achievementsRequested, this, [this] { m_navigator->goTo(Screen::Achievements); });
@@ -133,6 +139,17 @@ void MainWindow::connectShop()
     });
 }
 
+void MainWindow::connectGame()
+{
+    // LOGIC: Resume and Leave game map to pausing and ending the IGame round.
+    connect(m_game, &GameScreen::pauseRequested, this, [this] { setPaused(true); });
+    connect(m_pause, &PauseOverlay::resumeRequested, this, [this] { setPaused(false); });
+    connect(m_pause, &PauseOverlay::leaveRequested, this, [this] {
+        setPaused(false);
+        m_navigator->goTo(Screen::MainMenu);
+    });
+}
+
 void MainWindow::onAchievementUnlocked(const QString& id)
 {
     // LOGIC: call this from QtGameObserver when IAchievementObserver::onAchievementUnlocked fires. The reward
@@ -157,36 +174,72 @@ void MainWindow::updateProfile(const std::function<void(ProfileData&)>& change)
 void MainWindow::applyColor(ColorKind kind, const QString& id)
 {
     const ColorDef& color = Catalog::colors(kind)[Catalog::colorIndex(kind, id)];
-    if (kind == ColorKind::Snake)
-        m_menu->setSnakeColor(QColor(color.base));
-    else
-        m_menu->setGroundColors(QColor(color.base), QColor(color.shade));
+    for (MenuHeaderWidget* header : {m_menu->header(), m_pause->header()})
+    {
+        if (kind == ColorKind::Snake)
+            header->setSnakeColor(QColor(color.base));
+        else
+            header->setGroundColors(QColor(color.base), QColor(color.shade));
+    }
+    if (kind == ColorKind::Map)
+        m_game->setGroundColors(QColor(color.base), QColor(color.shade));
 }
 
 void MainWindow::showScores()
 {
     // LOGIC: IProgressService::applesBalance() and highScore(mode, board). Refresh it after every round.
-    m_menu->setScores(m_profile.data().applesBalance, m_profile.data().bestScore());
+    for (MenuHeaderWidget* header : {m_menu->header(), m_pause->header()})
+        header->setScores(m_profile.data().applesBalance, m_profile.data().bestScore());
 }
 
 void MainWindow::setAudioEnabled(bool enabled)
 {
-    // LOGIC: no audio engine yet. When there is one, mute or unmute it here.
+    m_sound.setEnabled(enabled);
     m_soundButton->setIcon(enabled ? QStringLiteral(":/icons/sound_on.svg") : QStringLiteral(":/icons/sound_off.svg"));
     m_soundButton->setToolTip(enabled ? tr("Sound on") : tr("Sound off"));
+}
+
+void MainWindow::setPaused(bool paused)
+{
+    if (paused)
+    {
+        const ProfileSettings& settings = m_profile.data().settings;
+        m_pause->setSummary(settings.mode, settings.speed, settings.board);
+        m_pause->raise();
+        m_soundButton->raise();
+        m_pause->show();
+    }
+    else
+    {
+        m_pause->hide();
+        m_game->setFocus();
+    }
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
     if (watched == m_background && event->type() == QEvent::Resize)
-        positionHudButtons();
+        positionOverlays();
     return QMainWindow::eventFilter(watched, event);
 }
 
-void MainWindow::positionHudButtons()
+void MainWindow::keyPressEvent(QKeyEvent* event)
 {
+    const Screen screen = m_navigator->current();
+    const bool leavesWithEscape = screen == Screen::Settings || screen == Screen::Achievements || screen == Screen::Shop;
+    if (event->key() == Qt::Key_Escape && leavesWithEscape)
+        m_navigator->goTo(Screen::MainMenu);
+    else
+        QMainWindow::keyPressEvent(event);
+}
+
+void MainWindow::positionOverlays()
+{
+    m_pause->setGeometry(m_background->rect());
     m_shopButton->move(kHudMargin, kHudMargin);
     m_soundButton->move(m_background->width() - kHudMargin - m_soundButton->width(), kHudMargin);
     m_shopButton->raise();
+    if (m_pause->isVisible())
+        m_pause->raise();
     m_soundButton->raise();
 }

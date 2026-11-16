@@ -37,12 +37,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>C:\Qt\6.12.0\msvc2022_64</QtInstall>
-    <QtModules>core;gui;widgets;svg</QtModules>
+    <QtModules>core;gui;widgets;svg;multimedia</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>C:\Qt\6.12.0\msvc2022_64</QtInstall>
-    <QtModules>core;gui;widgets;svg</QtModules>
+    <QtModules>core;gui;widgets;svg;multimedia</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -113,19 +113,23 @@
     <ClInclude Include="app\ProfileStore.h" />
     <ClCompile Include="app\ScreenNavigator.cpp" />
     <QtMoc Include="app\ScreenNavigator.h" />
+    <ClCompile Include="app\SoundPlayer.cpp" />
+    <ClInclude Include="app\SoundPlayer.h" />
     <ClInclude Include="app\Theme.h" />
   </ItemGroup>
   <ItemGroup Label="screens">
     <ClCompile Include="screens\AchievementsScreen.cpp" />
     <ClInclude Include="screens\AchievementsScreen.h" />
+    <ClCompile Include="screens\GameScreen.cpp" />
+    <QtMoc Include="screens\GameScreen.h" />
     <ClCompile Include="screens\ListScreen.cpp" />
     <ClInclude Include="screens\ListScreen.h" />
     <ClCompile Include="screens\MainMenuScreen.cpp" />
     <QtMoc Include="screens\MainMenuScreen.h" />
     <ClCompile Include="screens\PanelScreen.cpp" />
     <QtMoc Include="screens\PanelScreen.h" />
-    <ClCompile Include="screens\PlaceholderScreen.cpp" />
-    <ClInclude Include="screens\PlaceholderScreen.h" />
+    <ClCompile Include="screens\PauseOverlay.cpp" />
+    <QtMoc Include="screens\PauseOverlay.h" />
     <ClCompile Include="screens\SettingsScreen.cpp" />
     <QtMoc Include="screens\SettingsScreen.h" />
     <ClCompile Include="screens\ShopScreen.cpp" />
@@ -138,7 +142,11 @@
     <ClInclude Include="widgets\ArtWidget.h" />
     <ClCompile Include="widgets\BackgroundWidget.cpp" />
     <ClInclude Include="widgets\BackgroundWidget.h" />
+    <ClCompile Include="widgets\BoardWidget.cpp" />
+    <ClInclude Include="widgets\BoardWidget.h" />
     <ClInclude Include="widgets\Divider.h" />
+    <ClCompile Include="widgets\GuideWidget.cpp" />
+    <ClInclude Include="widgets\GuideWidget.h" />
     <ClCompile Include="widgets\HudButton.cpp" />
     <ClInclude Include="widgets\HudButton.h" />
     <ClCompile Include="widgets\IconButton.cpp" />
@@ -167,6 +175,7 @@
     <None Include="resources\art\count_3.svg" />
     <None Include="resources\art\count_5.svg" />
     <None Include="resources\art\drumstick.svg" />
+    <None Include="resources\art\guide.svg" />
     <None Include="resources\art\size_2x2.svg" />
     <None Include="resources\art\size_3x3.svg" />
     <None Include="resources\art\size_4x4.svg" />
@@ -189,6 +198,13 @@
     <None Include="resources\icons\sound_off.svg" />
     <None Include="resources\icons\sound_on.svg" />
     <None Include="resources\icons\star.svg" />
+    <None Include="resources\sounds\down.wav" />
+    <None Include="resources\sounds\eat.wav" />
+    <None Include="resources\sounds\hurt.wav" />
+    <None Include="resources\sounds\left.wav" />
+    <None Include="resources\sounds\right.wav" />
+    <None Include="resources\sounds\up.wav" />
+    <None Include="resources\sounds\win.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

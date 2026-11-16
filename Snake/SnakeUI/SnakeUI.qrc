@@ -29,5 +29,13 @@
         <file alias="art/speed_slow.svg">resources/art/speed_slow.svg</file>
         <file alias="art/speed_normal.svg">resources/art/speed_normal.svg</file>
         <file alias="art/speed_fast.svg">resources/art/speed_fast.svg</file>
+        <file alias="art/guide.svg">resources/art/guide.svg</file>
+        <file alias="sounds/up.wav">resources/sounds/up.wav</file>
+        <file alias="sounds/down.wav">resources/sounds/down.wav</file>
+        <file alias="sounds/left.wav">resources/sounds/left.wav</file>
+        <file alias="sounds/right.wav">resources/sounds/right.wav</file>
+        <file alias="sounds/eat.wav">resources/sounds/eat.wav</file>
+        <file alias="sounds/hurt.wav">resources/sounds/hurt.wav</file>
+        <file alias="sounds/win.wav">resources/sounds/win.wav</file>
     </qresource>
 </RCC>

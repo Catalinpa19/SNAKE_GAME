@@ -71,6 +71,7 @@ ProfileStore::ProfileStore(QString path)
 {
     load();
     sanitize();
+    save();
 }
 
 QString ProfileStore::defaultPath()

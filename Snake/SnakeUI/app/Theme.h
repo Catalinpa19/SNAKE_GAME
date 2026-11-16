@@ -59,6 +59,14 @@ QLabel#panelHeader {
     font-size: 24px;
 }
 
+QLabel#devNotice {
+    background: rgba(18, 13, 9, 210);
+    color: #FFF3CF;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
 QFrame#listRow {
     background: rgba(201, 162, 95, 36);
     border-radius: 6px;

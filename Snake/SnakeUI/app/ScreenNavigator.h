@@ -23,7 +23,9 @@ public:
     explicit ScreenNavigator(QStackedWidget* stack, QObject* parent = nullptr);
 
     // Each screen is centered in its own page, so it stays centered when the window is resized.
-    void addScreen(Screen id, QWidget* screen);
+    // A screen that fills its page stretches with the window instead of staying centered.
+    void addScreen(Screen id, QWidget* screen, bool fillsPage = false);
+    Screen current() const { return m_current; }
 
 public slots:
     void goTo(Screen id);
@@ -34,4 +36,5 @@ signals:
 private:
     QStackedWidget* m_stack;
     std::map<Screen, QWidget*> m_pages;
+    Screen m_current = Screen::MainMenu;
 };

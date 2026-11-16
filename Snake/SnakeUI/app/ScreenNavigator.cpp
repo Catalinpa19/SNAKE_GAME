@@ -6,6 +6,7 @@
 namespace
 {
 constexpr int kPageMargin = 16;
+constexpr int kHudClearance = 72;
 } // namespace
 
 ScreenNavigator::ScreenNavigator(QStackedWidget* stack, QObject* parent)
@@ -14,12 +15,12 @@ ScreenNavigator::ScreenNavigator(QStackedWidget* stack, QObject* parent)
 {
 }
 
-void ScreenNavigator::addScreen(Screen id, QWidget* screen)
+void ScreenNavigator::addScreen(Screen id, QWidget* screen, bool fillsPage)
 {
     auto* page = new QWidget;
     auto* layout = new QGridLayout(page);
-    layout->setContentsMargins(kPageMargin, kPageMargin, kPageMargin, kPageMargin);
-    layout->addWidget(screen, 0, 0, Qt::AlignCenter);
+    layout->setContentsMargins(kPageMargin, fillsPage ? kHudClearance : kPageMargin, kPageMargin, kPageMargin);
+    layout->addWidget(screen, 0, 0, fillsPage ? Qt::Alignment() : Qt::AlignCenter);
 
     m_stack->addWidget(page);
     m_pages[id] = page;
@@ -32,5 +33,6 @@ void ScreenNavigator::goTo(Screen id)
         return;
 
     m_stack->setCurrentWidget(it->second);
+    m_current = id;
     emit screenChanged(id);
 }

@@ -1,5 +1,6 @@
 #include "screens/SettingsScreen.h"
 
+#include "app/NumberFormat.h"
 #include "app/ProfileStore.h"
 #include "app/Theme.h"
 #include "widgets/MenuButton.h"
@@ -22,7 +23,7 @@ SettingsScreen::SettingsScreen(const ProfileData& profile, QWidget* parent)
     for (const int count : Catalog::kFruitCounts)
     {
         counts.append({QStringLiteral("count_%1").arg(count),
-                       count == 1 ? tr("1 drumstick") : tr("%1 drumsticks").arg(count)});
+                       count == 1 ? tr("1 drumstick") : tr("%1 drumsticks").arg(formatCount(count))});
     }
     auto* countRow = new OptionRow(counts, kLargeCell, 64, Catalog::fruitCountIndex(profile.settings.appleCount), 0, this);
     connect(countRow, &OptionRow::selected, this, [this](int i) { emit fruitCountSelected(Catalog::kFruitCounts[i]); });

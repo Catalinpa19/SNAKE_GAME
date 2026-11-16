@@ -1,6 +1,7 @@
 #include "screens/AchievementsScreen.h"
 
 #include "app/Catalog.h"
+#include "app/NumberFormat.h"
 #include "app/ProfileStore.h"
 #include "widgets/ListRow.h"
 
@@ -36,5 +37,5 @@ void AchievementsScreen::refresh(const ProfileData& profile)
     }
     endRows();
 
-    setHeaderText(QStringLiteral("%1 / %2").arg(unlockedCount).arg(Catalog::achievements().size()));
+    setHeaderText(QStringLiteral("%1 / %2").arg(formatCount(unlockedCount), formatCount(Catalog::achievements().size())));
 }

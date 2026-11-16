@@ -1,5 +1,7 @@
 #include "app/Catalog.h"
 
+#include "app/NumberFormat.h"
+
 #include <QCoreApplication>
 
 #include <algorithm>
@@ -158,7 +160,7 @@ ItemInfo rewardInfo(const AchievementDef& achievement)
 {
     if (achievement.rewardColorId == nullptr)
     {
-        return {QCoreApplication::translate("Catalog", "+%1 drumsticks").arg(achievement.rewardDrumsticks),
+        return {QCoreApplication::translate("Catalog", "+%1 drumsticks").arg(formatCount(achievement.rewardDrumsticks)),
                 QStringLiteral("drumstick")};
     }
     return colorInfo(achievement.rewardKind, QLatin1StringView(achievement.rewardColorId));

@@ -1,5 +1,6 @@
 #include "widgets/MenuHeaderWidget.h"
 
+#include "app/NumberFormat.h"
 #include "app/Theme.h"
 
 #include <QPainter>
@@ -14,8 +15,8 @@ constexpr int kGroundRows = 2;
 const QRectF kSnakeRect(0, 150, 318, 150);
 const QRectF kDrumstickRect(48, 34, 64, 64);
 const QRectF kTrophyRect(208, 24, 64, 84);
-const QRectF kDrumstickScoreRect(40, 114, 80, 34);
-const QRectF kTrophyScoreRect(200, 114, 80, 34);
+const QRectF kDrumstickScoreRect(20, 114, 120, 34);
+const QRectF kTrophyScoreRect(180, 114, 120, 34);
 } // namespace
 
 MenuHeaderWidget::MenuHeaderWidget(QWidget* parent)
@@ -80,6 +81,6 @@ void MenuHeaderWidget::drawScores(QPainter& painter) const
     font.setPixelSize(26);
     painter.setFont(font);
     painter.setPen(Theme::Cream);
-    painter.drawText(kDrumstickScoreRect, Qt::AlignCenter, QString::number(m_drumsticks));
-    painter.drawText(kTrophyScoreRect, Qt::AlignCenter, QString::number(m_bestScore));
+    painter.drawText(kDrumstickScoreRect, Qt::AlignCenter, formatCount(m_drumsticks));
+    painter.drawText(kTrophyScoreRect, Qt::AlignCenter, formatCount(m_bestScore));
 }

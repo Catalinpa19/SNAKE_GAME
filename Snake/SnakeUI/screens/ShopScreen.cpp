@@ -1,5 +1,6 @@
 #include "screens/ShopScreen.h"
 
+#include "app/NumberFormat.h"
 #include "app/ProfileStore.h"
 #include "widgets/ListRow.h"
 
@@ -48,7 +49,7 @@ ShopScreen::ShopScreen(const ProfileData& profile, QWidget* parent)
 void ShopScreen::refresh(const ProfileData& profile)
 {
     clearRows();
-    setHeaderText(QString::number(profile.applesBalance));
+    setHeaderText(formatCount(profile.applesBalance));
 
     const QList<ShopItem> items = itemsForSale(profile);
     if (items.isEmpty())
@@ -65,7 +66,7 @@ void ShopScreen::refresh(const ProfileData& profile)
 
         auto* row = new ListRow(item.info.art, kSwatchSize, !affordable);
         row->addTitle(item.info.label);
-        row->addArtLine({}, QStringLiteral("drumstick"), kPriceArtSize, QString::number(item.info.price));
+        row->addArtLine({}, QStringLiteral("drumstick"), kPriceArtSize, formatCount(item.info.price));
 
         auto* buy = new QPushButton(tr("Buy"), row);
         buy->setObjectName(QStringLiteral("buyButton"));

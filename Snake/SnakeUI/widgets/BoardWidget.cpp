@@ -13,10 +13,7 @@
 
 namespace
 {
-constexpr int kColumns = 17;
-constexpr int kRows = 15;
 constexpr int kPreferredCell = 30;
-constexpr int kMinimumCell = 16;
 constexpr int kCornerRadius = 6;
 constexpr int kGuideTop = 64;
 constexpr int kNoticeBottom = 24;

@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class BoardWidget;
+class QFrame;
 class QLabel;
 class SoundPlayer;
 
@@ -17,7 +18,10 @@ class GameScreen : public QWidget
 public:
     explicit GameScreen(SoundPlayer& sound, QWidget* parent = nullptr);
 
+    QSize minimumSizeHint() const override;
+
     void reset();
+    void setScore(int drumsticks);
     void setGroundColors(const QColor& light, const QColor& dark);
 
 signals:
@@ -25,9 +29,13 @@ signals:
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
+    QSize panelSizeForCell(int cell) const;
+
     SoundPlayer& m_sound;
+    QFrame* m_panel;
     BoardWidget* m_board;
     QLabel* m_score;
 };

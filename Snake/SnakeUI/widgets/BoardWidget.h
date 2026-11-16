@@ -11,6 +11,10 @@ class QVBoxLayout;
 class BoardWidget : public QWidget
 {
 public:
+    static constexpr int kColumns = 17;
+    static constexpr int kRows = 15;
+    static constexpr int kMinimumCell = 16;
+
     explicit BoardWidget(QWidget* parent = nullptr);
 
     QSize sizeHint() const override;

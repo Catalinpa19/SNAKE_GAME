@@ -20,6 +20,7 @@
 namespace
 {
 constexpr int kHudMargin = 16;
+const QSize kMinimumWindowSize(720, 780);
 } // namespace
 
 MainWindow::MainWindow(ProfileStore& profile, QWidget* parent)
@@ -28,6 +29,7 @@ MainWindow::MainWindow(ProfileStore& profile, QWidget* parent)
 {
     setWindowTitle(tr("Snake"));
     resize(800, 800);
+    setMinimumSize(kMinimumWindowSize);
 
     createScreens();
     createHudButtons();

@@ -151,8 +151,19 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="api\Enums.h" />
+    <ClInclude Include="api\Factory.h" />
+    <ClInclude Include="api\IAchievementService.h" />
+    <ClInclude Include="api\IGame.h" />
+    <ClInclude Include="api\IGameMode.h" />
+    <ClInclude Include="api\IProgressService.h" />
+    <ClInclude Include="api\ISkinService.h" />
+    <ClInclude Include="api\Types.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="api\IGameObserver.h" />
+    <ClInclude Include="src\Game\Board.h" />
+    <ClInclude Include="src\Game\Snake.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -162,6 +173,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SnakeLogic.cpp" />
+    <ClCompile Include="src\Game\Board.cpp" />
+    <ClCompile Include="src\Game\Snake.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

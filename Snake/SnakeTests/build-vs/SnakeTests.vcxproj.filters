@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\mocs_compilation_Debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\ProfileTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\TestSoundPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\Catalog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\ProfileStore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\ScreenNavigator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\AchievementsScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\GameScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\ListScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\MainMenuScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\PanelScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\PauseOverlay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\SettingsScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\ShopScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\ArtImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\ArtWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\BackgroundWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\BoardWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\GuideWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\HudButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\IconButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\ListRow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\MenuButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\MenuHeaderWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\OptionButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\OptionRow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\SvgButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\TitleWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\RP2KX6CT7F_Debug\qrc_SnakeUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\mocs_compilation_Release.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\RP2KX6CT7F_Release\qrc_SnakeUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\mocs_compilation_MinSizeRel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\RP2KX6CT7F_MinSizeRel\qrc_SnakeUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\mocs_compilation_RelWithDebInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\SnakeTests_autogen\RP2KX6CT7F_RelWithDebInfo\qrc_SnakeUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\Catalog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\NumberFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\ProfileStore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\ScreenNavigator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\SoundPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\app\Theme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\AchievementsScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\GameScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\ListScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\MainMenuScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\PanelScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\PauseOverlay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\SettingsScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\screens\ShopScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\ArtImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\ArtWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\BackgroundWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\BoardWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\Divider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\GuideWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\HudButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\IconButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\ListRow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\MenuButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\MenuHeaderWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\OptionButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\OptionRow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\SvgButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\widgets\TitleWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\build-vs\CMakeFiles\c72f13b72161a35917c46a97a7989496\qrc_SnakeUI.cpp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeTests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\scl_anul_2\practica\SNAKE_GAME\Snake\SnakeUI\SnakeUI.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1E3B046A-5973-3537-8480-8C24948F010D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{0DB9834E-A985-307B-AB25-B9C2D8E91967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{DE601D8C-DDD6-311A-8A9E-2EC099DAB163}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="..\SnakeUI\Debug|x64">
+    <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="..\SnakeUI\Release|x64">
+    <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
@@ -37,12 +37,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>C:\Qt\6.12.0\msvc2022_64</QtInstall>
-    <QtModules>core;gui;widgets;svg;testlib</QtModules>
+    <QtModules>core;gui;widgets;svg;multimedia;testlib</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>C:\Qt\6.12.0\msvc2022_64</QtInstall>
-    <QtModules>core;gui;widgets;svg;testlib</QtModules>
+    <QtModules>core;gui;widgets;svg;multimedia;testlib</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -71,7 +71,7 @@
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SnakeUI;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\include;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gtest;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gmock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\SnakeUI;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\include;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gtest;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gmock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -87,7 +87,7 @@
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SnakeUI;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\include;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gtest;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gmock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\SnakeUI;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\include;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gtest;$(ProjectDir)..\packages\gmock.1.11.0\lib\native\src\gmock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -99,23 +99,43 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <QtRcc Include="..\SnakeUI\SnakeUI.qrc" />
+  <ItemGroup Label="Tests">
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
-  <ItemGroup Label="app">
+  <ItemGroup Label="Tests\app">
+    <ClCompile Include="app\CatalogTests.cpp" />
+    <ClCompile Include="app\NavigationTests.cpp" />
+    <ClCompile Include="app\NumberFormatTests.cpp" />
+    <ClCompile Include="app\SoundPlayerTests.cpp" />
+    <ClCompile Include="app\UiStateTests.cpp" />
+  </ItemGroup>
+  <ItemGroup Label="Tests\screens">
+    <ClCompile Include="screens\GameScreenTests.cpp" />
+    <ClCompile Include="screens\MainMenuScreenTests.cpp" />
+    <ClCompile Include="screens\PauseOverlayTests.cpp" />
+    <ClCompile Include="screens\SettingsScreenTests.cpp" />
+    <ClCompile Include="screens\ShopScreenTests.cpp" />
+  </ItemGroup>
+  <ItemGroup Label="Tests\widgets">
+    <ClCompile Include="widgets\OptionRowTests.cpp" />
+  </ItemGroup>
+  <ItemGroup Label="Tests\support">
+    <ClInclude Include="support\TestHelpers.h" />
+  </ItemGroup>
+  <ItemGroup Label="SnakeUI\app">
     <ClCompile Include="..\SnakeUI\app\Catalog.cpp" />
     <ClInclude Include="..\SnakeUI\app\Catalog.h" />
     <ClCompile Include="..\SnakeUI\app\MainWindow.cpp" />
     <QtMoc Include="..\SnakeUI\app\MainWindow.h" />
-    <ClCompile Include="..\SnakeUI\app\ProfileStore.cpp" />
-    <ClInclude Include="..\SnakeUI\app\ProfileStore.h" />
+    <ClInclude Include="..\SnakeUI\app\NumberFormat.h" />
     <ClCompile Include="..\SnakeUI\app\ScreenNavigator.cpp" />
     <QtMoc Include="..\SnakeUI\app\ScreenNavigator.h" />
-    <ClCompile Include="TestSoundPlayer.cpp" />
+    <ClCompile Include="..\SnakeUI\app\SoundPlayer.cpp" />
     <ClInclude Include="..\SnakeUI\app\SoundPlayer.h" />
     <ClInclude Include="..\SnakeUI\app\Theme.h" />
+    <ClInclude Include="..\SnakeUI\app\UiState.h" />
   </ItemGroup>
-  <ItemGroup Label="screens">
+  <ItemGroup Label="SnakeUI\screens">
     <ClCompile Include="..\SnakeUI\screens\AchievementsScreen.cpp" />
     <ClInclude Include="..\SnakeUI\screens\AchievementsScreen.h" />
     <ClCompile Include="..\SnakeUI\screens\GameScreen.cpp" />
@@ -133,7 +153,7 @@
     <ClCompile Include="..\SnakeUI\screens\ShopScreen.cpp" />
     <QtMoc Include="..\SnakeUI\screens\ShopScreen.h" />
   </ItemGroup>
-  <ItemGroup Label="widgets">
+  <ItemGroup Label="SnakeUI\widgets">
     <ClCompile Include="..\SnakeUI\widgets\ArtImage.cpp" />
     <ClInclude Include="..\SnakeUI\widgets\ArtImage.h" />
     <ClCompile Include="..\SnakeUI\widgets\ArtWidget.cpp" />
@@ -164,19 +184,21 @@
     <ClCompile Include="..\SnakeUI\widgets\TitleWidget.cpp" />
     <ClInclude Include="..\SnakeUI\widgets\TitleWidget.h" />
   </ItemGroup>
+  <ItemGroup Label="SnakeUI\resources">
+    <QtRcc Include="..\SnakeUI\SnakeUI.qrc" />
+  </ItemGroup>
+  <ItemGroup Label="Third party">
+    <ClCompile Include="..\packages\gmock.1.11.0\lib\native\src\gtest\gtest-all.cc" />
+    <ClCompile Include="..\packages\gmock.1.11.0\lib\native\src\gmock\gmock-all.cc" />
+  </ItemGroup>
+  <ItemGroup Label="Build files">
+    <None Include="CMakeLists.txt" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
   </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="test.cpp" />
-    <ClCompile Include="ProfileTests.cpp" />
-    <ClCompile Include="..\packages\gmock.1.11.0\lib\native\src\gtest\gtest-all.cc" />
-    <ClCompile Include="..\packages\gmock.1.11.0\lib\native\src\gmock\gmock-all.cc" />
-    <ClInclude Include="MockInterfaces.h" />
-    <ClInclude Include="pch.h" />
-  </ItemGroup>
 </Project>

@@ -2,10 +2,9 @@
 
 #include "app/Catalog.h"
 #include "app/SoundPlayer.h"
+#include "app/UiState.h"
 
 #include <QMainWindow>
-
-#include <functional>
 
 class AchievementsScreen;
 class BackgroundWidget;
@@ -13,8 +12,6 @@ class GameScreen;
 class HudButton;
 class MainMenuScreen;
 class PauseOverlay;
-struct ProfileData;
-class ProfileStore;
 class ScreenNavigator;
 class SettingsScreen;
 class ShopScreen;
@@ -24,7 +21,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(ProfileStore& profile, QWidget* parent = nullptr);
+    explicit MainWindow(QWidget* parent = nullptr);
 
 protected:
     bool eventFilter(QObject* watched, QEvent* event) override;
@@ -38,16 +35,16 @@ private:
     void connectShop();
     void connectGame();
 
-    void onAchievementUnlocked(const QString& id);
-    void updateProfile(const std::function<void(ProfileData&)>& change);
-    void applyColor(ColorKind kind, const QString& id);
+    void refreshFromLogic();
+    void applyColor(ColorKind kind, int color);
     void showScores();
     void setAudioEnabled(bool enabled);
     void setPaused(bool paused);
     void positionOverlays();
 
-    ProfileStore& m_profile;
+    UiState m_state;
     SoundPlayer m_sound;
+    bool m_audioEnabled = true;
     ScreenNavigator* m_navigator = nullptr;
     BackgroundWidget* m_background = nullptr;
     MainMenuScreen* m_menu = nullptr;

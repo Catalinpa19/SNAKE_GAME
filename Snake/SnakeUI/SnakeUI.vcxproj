@@ -36,7 +36,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.12.0_msvc</QtInstall>
+    <QtInstall>C:\Qt\6.12.0\msvc2022_64</QtInstall>
     <QtModules>core;gui;widgets;svg;multimedia</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -109,13 +109,13 @@
     <ClInclude Include="app\Catalog.h" />
     <ClCompile Include="app\MainWindow.cpp" />
     <QtMoc Include="app\MainWindow.h" />
-    <ClCompile Include="app\ProfileStore.cpp" />
-    <ClInclude Include="app\ProfileStore.h" />
+    <ClInclude Include="app\NumberFormat.h" />
     <ClCompile Include="app\ScreenNavigator.cpp" />
     <QtMoc Include="app\ScreenNavigator.h" />
     <ClCompile Include="app\SoundPlayer.cpp" />
     <ClInclude Include="app\SoundPlayer.h" />
     <ClInclude Include="app\Theme.h" />
+    <ClInclude Include="app\UiState.h" />
   </ItemGroup>
   <ItemGroup Label="screens">
     <ClCompile Include="screens\AchievementsScreen.cpp" />

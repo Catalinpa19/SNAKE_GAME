@@ -3,17 +3,17 @@
 #include "app/Catalog.h"
 #include "screens/ListScreen.h"
 
-struct ProfileData;
+struct UiState;
 
 class ShopScreen : public ListScreen
 {
     Q_OBJECT
 
 public:
-    explicit ShopScreen(const ProfileData& profile, QWidget* parent = nullptr);
+    explicit ShopScreen(const UiState& state, QWidget* parent = nullptr);
 
-    void refresh(const ProfileData& profile);
+    void refresh(const UiState& state);
 
 signals:
-    void purchaseRequested(ColorKind kind, const QString& id);
+    void purchaseRequested(ColorKind kind, int color);
 };

@@ -1,7 +1,7 @@
 #include "screens/ShopScreen.h"
 
 #include "app/NumberFormat.h"
-#include "app/ProfileStore.h"
+#include "app/UiState.h"
 #include "widgets/ListRow.h"
 
 #include <QLabel>
@@ -19,20 +19,20 @@ constexpr QSize kBuyButtonSize(76, 36);
 struct ShopItem
 {
     ColorKind kind;
-    QString id;
+    int color;
     ItemInfo info;
 };
 
-QList<ShopItem> itemsForSale(const ProfileData& profile)
+QList<ShopItem> itemsForSale(const UiState& state)
 {
     QList<ShopItem> items;
     for (const ColorKind kind : kColorKinds)
     {
-        for (const ColorDef& color : Catalog::colors(kind))
+        const auto colors = Catalog::colors(kind);
+        for (int i = 0; i < static_cast<int>(colors.size()); ++i)
         {
-            const QString id = QLatin1StringView(color.id);
-            if (color.source == ColorSource::Shop && !profile.unlocked(kind).contains(id))
-                items.append({kind, id, Catalog::colorInfo(kind, id)});
+            if (colors[i].source == ColorSource::Shop && !state.unlocked(kind).contains(i))
+                items.append({kind, i, Catalog::colorInfo(kind, i)});
         }
     }
     std::ranges::stable_sort(items, {}, [](const ShopItem& item) { return item.info.price; });
@@ -40,18 +40,18 @@ QList<ShopItem> itemsForSale(const ProfileData& profile)
 }
 } // namespace
 
-ShopScreen::ShopScreen(const ProfileData& profile, QWidget* parent)
+ShopScreen::ShopScreen(const UiState& state, QWidget* parent)
     : ListScreen(QStringLiteral("drumstick"), kHeaderArtSize, parent)
 {
-    refresh(profile);
+    refresh(state);
 }
 
-void ShopScreen::refresh(const ProfileData& profile)
+void ShopScreen::refresh(const UiState& state)
 {
     clearRows();
-    setHeaderText(formatCount(profile.applesBalance));
+    setHeaderText(formatCount(state.applesBalance));
 
-    const QList<ShopItem> items = itemsForSale(profile);
+    const QList<ShopItem> items = itemsForSale(state);
     if (items.isEmpty())
     {
         auto* message = new QLabel(tr("Everything is unlocked!"), rowsParent());
@@ -62,7 +62,7 @@ void ShopScreen::refresh(const ProfileData& profile)
 
     for (const ShopItem& item : items)
     {
-        const bool affordable = profile.applesBalance >= item.info.price;
+        const bool affordable = state.applesBalance >= item.info.price;
 
         auto* row = new ListRow(item.info.art, kSwatchSize, !affordable);
         row->addTitle(item.info.label);
@@ -73,7 +73,7 @@ void ShopScreen::refresh(const ProfileData& profile)
         buy->setFixedSize(kBuyButtonSize);
         buy->setCursor(Qt::PointingHandCursor);
         buy->setEnabled(affordable);
-        connect(buy, &QPushButton::clicked, this, [this, item] { emit purchaseRequested(item.kind, item.id); });
+        connect(buy, &QPushButton::clicked, this, [this, item] { emit purchaseRequested(item.kind, item.color); });
         row->setAction(buy);
 
         addRow(row);

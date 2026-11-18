@@ -5,7 +5,7 @@
 
 #include <QList>
 
-struct ProfileData;
+struct UiState;
 class OptionRow;
 
 class SettingsScreen : public PanelScreen
@@ -13,18 +13,19 @@ class SettingsScreen : public PanelScreen
     Q_OBJECT
 
 public:
-    explicit SettingsScreen(const ProfileData& profile, QWidget* parent = nullptr);
+    explicit SettingsScreen(const UiState& state, QWidget* parent = nullptr);
 
-    void unlockColor(ColorKind kind, const QString& id);
+    // Re-reads which colors are unlocked.
+    void refresh(const UiState& state);
 
 signals:
     void fruitCountSelected(int count);
     void speedSelected(const QString& speed);
     void boardSizeSelected(const QString& board);
-    void colorSelected(ColorKind kind, const QString& id);
+    void colorSelected(ColorKind kind, int color);
 
 private:
-    OptionRow* addColorRow(ColorKind kind, const ProfileData& profile);
+    OptionRow* addColorRow(ColorKind kind, const UiState& state);
 
     std::array<OptionRow*, kColorKinds.size()> m_colorRows{};
     QList<OptionRow*> m_randomizableRows;

@@ -2,7 +2,7 @@
 
 #include "app/Catalog.h"
 #include "app/NumberFormat.h"
-#include "app/ProfileStore.h"
+#include "app/UiState.h"
 #include "widgets/ListRow.h"
 
 namespace
@@ -12,20 +12,22 @@ constexpr QSize kIconSize(48, 60);
 constexpr QSize kRewardArtSize(24, 24);
 } // namespace
 
-AchievementsScreen::AchievementsScreen(const ProfileData& profile, QWidget* parent)
+AchievementsScreen::AchievementsScreen(const UiState& state, QWidget* parent)
     : ListScreen(QStringLiteral("trophy"), kHeaderArtSize, parent)
 {
-    refresh(profile);
+    refresh(state);
 }
 
-void AchievementsScreen::refresh(const ProfileData& profile)
+void AchievementsScreen::refresh(const UiState& state)
 {
     clearRows();
 
     int unlockedCount = 0;
-    for (const AchievementDef& def : Catalog::achievements())
+    const auto achievements = Catalog::achievements();
+    for (int i = 0; i < static_cast<int>(achievements.size()); ++i)
     {
-        const bool unlocked = profile.unlockedAchievements.contains(QLatin1StringView(def.id));
+        const AchievementDef& def = achievements[i];
+        const bool unlocked = state.unlockedAchievements.contains(i);
         unlockedCount += unlocked ? 1 : 0;
 
         const ItemInfo reward = Catalog::rewardInfo(def);

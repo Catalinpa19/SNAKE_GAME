@@ -1,6 +1,5 @@
 #include "app/MainWindow.h"
 
-#include "app/ProfileStore.h"
 #include "app/ScreenNavigator.h"
 #include "screens/AchievementsScreen.h"
 #include "screens/GameScreen.h"
@@ -23,9 +22,8 @@ constexpr int kHudMargin = 16;
 const QSize kMinimumWindowSize(720, 780);
 } // namespace
 
-MainWindow::MainWindow(ProfileStore& profile, QWidget* parent)
+MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
-    , m_profile(profile)
 {
     setWindowTitle(tr("Snake"));
     resize(800, 800);
@@ -39,7 +37,7 @@ MainWindow::MainWindow(ProfileStore& profile, QWidget* parent)
     connectGame();
 
     for (const ColorKind kind : kColorKinds)
-        applyColor(kind, m_profile.data().equipped(kind));
+        applyColor(kind, m_state.equipped(kind));
     showScores();
 
     for (PanelScreen* screen : std::initializer_list<PanelScreen*>{m_settings, m_achievements, m_shop})
@@ -59,9 +57,9 @@ void MainWindow::createScreens()
 
     m_navigator = new ScreenNavigator(stack, this);
     m_menu = new MainMenuScreen;
-    m_settings = new SettingsScreen(m_profile.data());
-    m_achievements = new AchievementsScreen(m_profile.data());
-    m_shop = new ShopScreen(m_profile.data());
+    m_settings = new SettingsScreen(m_state);
+    m_achievements = new AchievementsScreen(m_state);
+    m_shop = new ShopScreen(m_state);
     m_game = new GameScreen(m_sound);
     m_pause = new PauseOverlay(m_sound, m_background);
 
@@ -73,12 +71,10 @@ void MainWindow::createScreens()
 
     connect(m_navigator, &ScreenNavigator::screenChanged, this, [this](Screen screen) {
         m_shopButton->setVisible(screen != Screen::Game);
-        if (screen == Screen::Shop)
-            m_shop->refresh(m_profile.data());
-        else if (screen == Screen::Achievements)
-            m_achievements->refresh(m_profile.data());
-        else if (screen == Screen::Game)
+        if (screen == Screen::Game)
             m_game->reset();
+        else
+            refreshFromLogic();
     });
 }
 
@@ -87,16 +83,13 @@ void MainWindow::createHudButtons()
     m_shopButton = new HudButton(QStringLiteral(":/icons/shop.svg"), m_background);
     m_shopButton->setToolTip(tr("Shop"));
     m_soundButton = new HudButton({}, m_background);
-    setAudioEnabled(m_profile.data().settings.audioEnabled);
+    setAudioEnabled(m_audioEnabled);
 
     m_background->installEventFilter(this);
     positionOverlays();
 
     connect(m_shopButton, &QAbstractButton::clicked, this, [this] { m_navigator->goTo(Screen::Shop); });
-    connect(m_soundButton, &QAbstractButton::clicked, this, [this] {
-        updateProfile([](ProfileData& profile) { profile.settings.audioEnabled = !profile.settings.audioEnabled; });
-        setAudioEnabled(m_profile.data().settings.audioEnabled);
-    });
+    connect(m_soundButton, &QAbstractButton::clicked, this, [this] { setAudioEnabled(!m_audioEnabled); });
 }
 
 void MainWindow::connectMenu()
@@ -108,36 +101,25 @@ void MainWindow::connectMenu()
 
 void MainWindow::connectSettings()
 {
-    // LOGIC: the selections below build the GameSettings (mode, board, appleCount, speed) that createGame()
-    // receives. The colors only affect how the UI draws the snake and the board.
-    connect(m_settings, &SettingsScreen::fruitCountSelected, this, [this](int count) {
-        updateProfile([count](ProfileData& profile) { profile.settings.appleCount = count; });
-    });
-    connect(m_settings, &SettingsScreen::speedSelected, this, [this](const QString& speed) {
-        updateProfile([&speed](ProfileData& profile) { profile.settings.speed = speed; });
-    });
+    // LOGIC: persisting the picks and turning them into the GameSettings belongs to SnakeLogic.
+    connect(m_settings, &SettingsScreen::fruitCountSelected, this, [this](int count) { m_state.settings.appleCount = count; });
+    connect(m_settings, &SettingsScreen::speedSelected, this, [this](const QString& speed) { m_state.settings.speed = speed; });
     connect(m_settings, &SettingsScreen::boardSizeSelected, this, [this](const QString& board) {
-        updateProfile([&board](ProfileData& profile) { profile.settings.board = board; });
+        m_state.settings.board = board;
+        // LOGIC: the high score depends on the board size: IProgressService::highScore(mode, board).
         showScores();
     });
-    connect(m_settings, &SettingsScreen::colorSelected, this, [this](ColorKind kind, const QString& id) {
-        updateProfile([kind, &id](ProfileData& profile) { profile.equipped(kind) = id; });
-        applyColor(kind, id);
+    connect(m_settings, &SettingsScreen::colorSelected, this, [this](ColorKind kind, int color) {
+        m_state.equipped(kind) = color;
+        applyColor(kind, color);
     });
 }
 
 void MainWindow::connectShop()
 {
-    // LOGIC: ISkinService::buy(skin) replaces ProfileStore::purchaseColor. The balance and the unlocked
-    // skins come back from IProgressService / ISkinService.
-    connect(m_shop, &ShopScreen::purchaseRequested, this, [this](ColorKind kind, const QString& id) {
-        if (!m_profile.purchaseColor(kind, id))
-            return;
-        m_profile.save();
-
-        m_shop->refresh(m_profile.data());
-        m_settings->unlockColor(kind, id);
-        showScores();
+    connect(m_shop, &ShopScreen::purchaseRequested, this, [](ColorKind, int) {
+        // LOGIC: ISkinService::buy(skin). It checks the price, takes the drumsticks and unlocks the skin.
+        // Then call refreshFromLogic().
     });
 }
 
@@ -150,32 +132,24 @@ void MainWindow::connectGame()
         setPaused(false);
         m_navigator->goTo(Screen::MainMenu);
     });
+
+    // LOGIC: connect QtGameObserver here: achievementUnlocked(id) -> refreshFromLogic(), and gameOver
+    // -> refreshFromLogic() (new balance and high score).
 }
 
-void MainWindow::onAchievementUnlocked(const QString& id)
+void MainWindow::refreshFromLogic()
 {
-    // LOGIC: call this from QtGameObserver when IAchievementObserver::onAchievementUnlocked fires. The reward
-    // is then granted by IAchievementService, so only the UI refresh below stays.
-    if (!m_profile.unlockAchievement(id))
-        return;
-    m_profile.save();
-
-    const AchievementDef& achievement = Catalog::achievements()[Catalog::achievementIndex(id)];
-    if (achievement.rewardColorId != nullptr)
-        m_settings->unlockColor(achievement.rewardKind, QLatin1StringView(achievement.rewardColorId));
-    m_achievements->refresh(m_profile.data());
+    // LOGIC: read the balance, high score, unlocked skins and unlocked achievements from IProgressService,
+    // ISkinService and IAchievementService into m_state. For now m_state only holds placeholders.
+    m_shop->refresh(m_state);
+    m_achievements->refresh(m_state);
+    m_settings->refresh(m_state);
     showScores();
 }
 
-void MainWindow::updateProfile(const std::function<void(ProfileData&)>& change)
+void MainWindow::applyColor(ColorKind kind, int colorId)
 {
-    change(m_profile.data());
-    m_profile.save();
-}
-
-void MainWindow::applyColor(ColorKind kind, const QString& id)
-{
-    const ColorDef& color = Catalog::colors(kind)[Catalog::colorIndex(kind, id)];
+    const ColorDef& color = Catalog::colors(kind)[colorId];
     for (MenuHeaderWidget* header : {m_menu->header(), m_pause->header()})
     {
         if (kind == ColorKind::Snake)
@@ -189,13 +163,13 @@ void MainWindow::applyColor(ColorKind kind, const QString& id)
 
 void MainWindow::showScores()
 {
-    // LOGIC: IProgressService::applesBalance() and highScore(mode, board). Refresh it after every round.
     for (MenuHeaderWidget* header : {m_menu->header(), m_pause->header()})
-        header->setScores(m_profile.data().applesBalance, m_profile.data().bestScore());
+        header->setScores(m_state.applesBalance, m_state.bestScore);
 }
 
 void MainWindow::setAudioEnabled(bool enabled)
 {
+    m_audioEnabled = enabled;
     m_sound.setEnabled(enabled);
     m_soundButton->setIcon(enabled ? QStringLiteral(":/icons/sound_on.svg") : QStringLiteral(":/icons/sound_off.svg"));
     m_soundButton->setToolTip(enabled ? tr("Sound on") : tr("Sound off"));
@@ -205,8 +179,7 @@ void MainWindow::setPaused(bool paused)
 {
     if (paused)
     {
-        const ProfileSettings& settings = m_profile.data().settings;
-        m_pause->setSummary(settings.mode, settings.speed, settings.board);
+        m_pause->setSummary(m_state.settings.mode, m_state.settings.speed, m_state.settings.board);
         m_pause->raise();
         m_soundButton->raise();
         m_pause->show();

@@ -1,6 +1,0 @@
-set(__QT_DEPLOY_TARGETS "snake_gmock;SnakeTests")
-set(__QT_DEPLOY_TARGET_snake_gmock_FILE C:/scl_anul_2/practica/SNAKE_GAME/Snake/SnakeTests/build-vs/RelWithDebInfo/snake_gmock.lib)
-set(__QT_DEPLOY_TARGET_snake_gmock_TYPE STATIC_LIBRARY)
-set(__QT_DEPLOY_TARGET_SnakeTests_FILE C:/scl_anul_2/practica/SNAKE_GAME/Snake/SnakeTests/build-vs/RelWithDebInfo/SnakeTests.exe)
-set(__QT_DEPLOY_TARGET_SnakeTests_TYPE EXECUTABLE)
-set(__QT_DEPLOY_TARGET_SnakeTests_RUNTIME_DLLS C:/Qt/6.12.0/msvc2022_64/bin/Qt6Widgets.dll;C:/Qt/6.12.0/msvc2022_64/bin/Qt6Svg.dll;C:/Qt/6.12.0/msvc2022_64/bin/Qt6Test.dll;C:/Qt/6.12.0/msvc2022_64/bin/Qt6Gui.dll;C:/Qt/6.12.0/msvc2022_64/bin/Qt6Core.dll)

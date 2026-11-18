@@ -1,5 +1,0 @@
-C:/scl_anul_2/practica/SNAKE_GAME/Snake/SnakeTests/build-vs/CMakeFiles/snake_gmock.dir
-C:/scl_anul_2/practica/SNAKE_GAME/Snake/SnakeTests/build-vs/CMakeFiles/SnakeTests.dir
-C:/scl_anul_2/practica/SNAKE_GAME/Snake/SnakeTests/build-vs/CMakeFiles/RUN_TESTS.dir
-C:/scl_anul_2/practica/SNAKE_GAME/Snake/SnakeTests/build-vs/CMakeFiles/ALL_BUILD.dir
-C:/scl_anul_2/practica/SNAKE_GAME/Snake/SnakeTests/build-vs/CMakeFiles/ZERO_CHECK.dir

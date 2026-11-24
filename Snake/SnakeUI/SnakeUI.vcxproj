@@ -109,13 +109,13 @@
     <ClInclude Include="app\Catalog.h" />
     <ClCompile Include="app\MainWindow.cpp" />
     <QtMoc Include="app\MainWindow.h" />
-    <ClCompile Include="app\ProfileStore.cpp" />
-    <ClInclude Include="app\ProfileStore.h" />
+    <ClInclude Include="app\NumberFormat.h" />
     <ClCompile Include="app\ScreenNavigator.cpp" />
     <QtMoc Include="app\ScreenNavigator.h" />
     <ClCompile Include="app\SoundPlayer.cpp" />
     <ClInclude Include="app\SoundPlayer.h" />
     <ClInclude Include="app\Theme.h" />
+    <ClInclude Include="app\UiState.h" />
   </ItemGroup>
   <ItemGroup Label="screens">
     <ClCompile Include="screens\AchievementsScreen.cpp" />

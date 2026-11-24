@@ -1,6 +1,4 @@
-#include "app/Catalog.h"
 #include "app/MainWindow.h"
-#include "app/ProfileStore.h"
 #include "app/Theme.h"
 
 #include <QApplication>
@@ -29,17 +27,14 @@ QIcon makeAppIcon()
 
 int main(int argc, char* argv[])
 {
-    Q_ASSERT_X(Catalog::isConsistent(), "Catalog", "colors and achievement rewards do not match");
-
     QApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("Snake"));
     app.setWindowIcon(makeAppIcon());
     app.setStyleSheet(Theme::styleSheet());
 
-    // LOGIC: createServices(profilePath) from Factory.h replaces ProfileStore. Keep passing the AppData path
-    // from ProfileStore::defaultPath(), the logic library must not compute it.
-    ProfileStore profile(ProfileStore::defaultPath());
-    MainWindow window(profile);
+    // LOGIC: createServices(profilePath) from Factory.h goes here. The profile path is the AppData folder
+    // (QStandardPaths::AppDataLocation): SnakeLogic must not compute it. The services are then given to MainWindow.
+    MainWindow window;
     window.show();
     return app.exec();
 }

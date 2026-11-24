@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="app"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000001}</UniqueIdentifier></Filter>
-    <Filter Include="screens"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000002}</UniqueIdentifier></Filter>
-    <Filter Include="widgets"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000003}</UniqueIdentifier></Filter>
-    <Filter Include="resources"><UniqueIdentifier>{A1000000-0000-4000-8000-000000000004}</UniqueIdentifier>
+    <Filter Include="app">
+      <UniqueIdentifier>{A1000000-0000-4000-8000-000000000001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="screens">
+      <UniqueIdentifier>{A1000000-0000-4000-8000-000000000002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="widgets">
+      <UniqueIdentifier>{A1000000-0000-4000-8000-000000000003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{A1000000-0000-4000-8000-000000000004}</UniqueIdentifier>
       <Extensions>qrc;svg;png;wav</Extensions>
     </Filter>
   </ItemGroup>
@@ -20,13 +27,13 @@
     <ClInclude Include="app\Catalog.h"><Filter>app</Filter></ClInclude>
     <ClCompile Include="app\MainWindow.cpp"><Filter>app</Filter></ClCompile>
     <QtMoc Include="app\MainWindow.h"><Filter>app</Filter></QtMoc>
-    <ClCompile Include="app\ProfileStore.cpp"><Filter>app</Filter></ClCompile>
-    <ClInclude Include="app\ProfileStore.h"><Filter>app</Filter></ClInclude>
+    <ClInclude Include="app\NumberFormat.h"><Filter>app</Filter></ClInclude>
     <ClCompile Include="app\ScreenNavigator.cpp"><Filter>app</Filter></ClCompile>
     <QtMoc Include="app\ScreenNavigator.h"><Filter>app</Filter></QtMoc>
     <ClCompile Include="app\SoundPlayer.cpp"><Filter>app</Filter></ClCompile>
     <ClInclude Include="app\SoundPlayer.h"><Filter>app</Filter></ClInclude>
     <ClInclude Include="app\Theme.h"><Filter>app</Filter></ClInclude>
+    <ClInclude Include="app\UiState.h"><Filter>app</Filter></ClInclude>
     <ClCompile Include="screens\AchievementsScreen.cpp"><Filter>screens</Filter></ClCompile>
     <ClInclude Include="screens\AchievementsScreen.h"><Filter>screens</Filter></ClInclude>
     <ClCompile Include="screens\GameScreen.cpp"><Filter>screens</Filter></ClCompile>

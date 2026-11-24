@@ -33,3 +33,7 @@ packages/
 # Temporary files
 *.log
 *.tmp
+
+# CMake build folders
+build/
+build-vs/

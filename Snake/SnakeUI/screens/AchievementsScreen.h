@@ -2,12 +2,12 @@
 
 #include "screens/ListScreen.h"
 
-struct ProfileData;
+struct UiState;
 
 class AchievementsScreen : public ListScreen
 {
 public:
-    explicit AchievementsScreen(const ProfileData& profile, QWidget* parent = nullptr);
+    explicit AchievementsScreen(const UiState& state, QWidget* parent = nullptr);
 
-    void refresh(const ProfileData& profile);
+    void refresh(const UiState& state);
 };

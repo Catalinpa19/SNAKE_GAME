@@ -19,6 +19,8 @@ namespace SnakeLogic
     {
         int row = 0;
         int column = 0;
+
+        bool operator==(const Position&) const = default;
     };
 
 

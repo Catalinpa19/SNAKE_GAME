@@ -1,24 +1,30 @@
-
 #pragma once
 
-#include "Enums.h"
-#include "Types.h"
+#include "ISkinService.h"
+#include "IProgressService.h"
+#include "ProfileStore.h"
 
+#include <memory>
 #include <vector>
 
 namespace SnakeLogic
 {
-    class ISkinService
+    class SkinService : public ISkinService
     {
+    private:
+        std::shared_ptr<ProfileStore> profile;
+        std::shared_ptr<IProgressService> progress;
+
     public:
-        virtual ~ISkinService() = default;
+        SkinService(
+            std::shared_ptr<ProfileStore> profile,
+            std::shared_ptr<IProgressService> progress
+        );
 
-        virtual std::vector<SkinInfo> getAvailableSkins() const = 0;
+        std::vector<SkinInfo> getAvailableSkins() const override;
+        SkinId getEquippedSkin() const override;
 
-        virtual SkinId getEquippedSkin() const = 0;
-
-        virtual bool unlockSkin(SkinId skin) = 0;
-
-        virtual bool equipSkin(SkinId skin) = 0;
+        bool unlockSkin(SkinId skin) override;
+        bool equipSkin(SkinId skin) override;
     };
 }

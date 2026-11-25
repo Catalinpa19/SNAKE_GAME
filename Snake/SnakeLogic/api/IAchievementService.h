@@ -1,37 +1,33 @@
-
 #pragma once
 
-#include "Enums.h"
-#include "Types.h"
-#include "IGameObserver.h"
+#include "IAchievementService.h"
+#include "ProfileStore.h"
 
+#include <memory>
 #include <vector>
 
 namespace SnakeLogic
 {
-    class IAchievementObserver
+    class AchievementService : public IAchievementService
     {
+    private:
+        std::shared_ptr<ProfileStore> profile;
+        std::vector<IAchievementObserver*> observers;
+
+        void unlock(AchievementId achievement);
+
     public:
-        virtual ~IAchievementObserver() = default;
+        explicit AchievementService(
+            std::shared_ptr<ProfileStore> profile
+        );
 
-        virtual void onAchievementUnlocked(
-            AchievementId achievement
-        ) = 0;
-    };
+        std::vector<AchievementInfo> getAchievements() const override;
 
-    class IAchievementService : public IGameObserver
-    {
-    public:
-        virtual ~IAchievementService() = default;
+        void addObserver(IAchievementObserver* observer) override;
+        void removeObserver(IAchievementObserver* observer) override;
 
-        virtual std::vector<AchievementInfo> getAchievements() const = 0;
-
-        virtual void addObserver(
-            IAchievementObserver* observer
-        ) = 0;
-
-        virtual void removeObserver(
-            IAchievementObserver* observer
-        ) = 0;
+        void onAppleEaten() override;
+        void onScoreChanged(int newScore) override;
+        void onGameOver(int finalScore) override;
     };
 }

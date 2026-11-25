@@ -3,18 +3,16 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 #include "Enums.h"
 
 namespace SnakeLogic
 {
-
     class IProgressService;
     class ISkinService;
     class IAchievementService;
 
-
-    
     struct Position
     {
         int row = 0;
@@ -22,7 +20,6 @@ namespace SnakeLogic
 
         bool operator==(const Position&) const = default;
     };
-
 
     struct GameSettings
     {
@@ -32,8 +29,6 @@ namespace SnakeLogic
         int appleCount = 1;
     };
 
-
-   
     struct SkinInfo
     {
         SkinId id;
@@ -42,8 +37,6 @@ namespace SnakeLogic
         bool unlocked;
     };
 
-
-    
     struct AchievementInfo
     {
         AchievementId id;
@@ -52,6 +45,13 @@ namespace SnakeLogic
         bool unlocked;
     };
 
+    struct GameSnapshot
+    {
+        GameState state = GameState::Ready;
+        std::vector<Position> snakeBody;
+        std::vector<Position> apples;
+        int score = 0;
+    };
 
     struct Services
     {
